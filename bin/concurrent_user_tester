@@ -1,0 +1,9 @@
+#!/bin/sh
+
+export CLASSPATH_PREFIX=target/test-classes:target/classes
+
+sh target/appassembler/bin/concurrent_user_tester $*
+while [ $? -ne 0 ]; do
+    sleep 1
+    sh target/appassembler/bin/concurrent_user_tester -restart $*
+done
